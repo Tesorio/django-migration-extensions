@@ -17,10 +17,10 @@ Simply put ``django_migration_extensions`` in your ``INSTALLED_APPS``
 Strategies for Handling Migration Conflicts
 ===========================================
 
-Django uses a very safe approach in terms of handling migration conflicts: it will not
-let more than one person in your team make **any** changes to an app that requires a
-migration. This can turn in a bottleneck when you have a large team making multiple
-changes throughout the day.
+Django uses a very safe approach in terms of handling migration conflicts: it will not let more than one person
+in your team to make **any** changes to an app that requires a migration, without having someone to merge the
+conflicts manually. This can turn in a bottleneck when you have a large team making multiple changes throughout
+the day.
 
 Let's say you have the following scenario:
 
