@@ -8,6 +8,12 @@ Table of Contents
    :local:
 
 
+Installation
+============
+
+Simply put ``django_migration_extensions`` in your ``INSTALLED_APPS``
+
+
 Strategies for Handling Migration Conflicts
 ===========================================
 
@@ -36,6 +42,16 @@ But now imagine you have a quite large team, how could we improve this experienc
 
 ModelDetectConflictStrategy
 ---------------------------
+
+Installation
+////////////
+
+In your settings file, add:
+
+.. code:: python
+
+   MIGRATION_CONFLICT_DETECTOR_STRATEGY = "django_migration_extensions.strategies.ModelDetectConflictStrategy"
+   
 
 The ``ModelDetectConflictStrategy`` strategy leverages the built-in conflict detector in Django Migrations, that does not
 accept multiple leaf nodes in the migration graph, by **allowing multiple leaf nodes unless they change the same model**.
