@@ -90,9 +90,11 @@ class ModelDetectConflictStrategy(BaseConflictStrategy):
         """
         Writes the manifest file
         """
+        app_labels = [app_config.label for app_config in apps.get_app_configs()]
+
         # create mapping (1-1) between model and last migration name
-        model_migration_map = OrderedDict()
-        nodes = self._get_sorted_nodes()
+        model_migration_map = {}
+        nodes = self._get_sorted_nodes(app_labels)
         for (app_label, migration_name), migration in nodes:
             models_changed = self._find_models_changed(migration)
             for model in models_changed:
@@ -103,9 +105,18 @@ class ModelDetectConflictStrategy(BaseConflictStrategy):
             ("_H{:02d}".format(i), msg) for i, msg in enumerate(self._manifest_header)
         ]
 
+        # turn model_migration_map into a list
+        def _model_migration_map_item_key(item):
+            (app_label, model_name), migration_name = item
+            return (app_labels.index(app_label), model_name)
+
+        model_migration_map_items = sorted(
+            model_migration_map.items(), key=_model_migration_map_item_key
+        )
+
         model_changes = [
             ("{}.{}".format(app_label, model_name), migration_name)
-            for (app_label, model_name), migration_name in model_migration_map.items()
+            for (app_label, model_name), migration_name in model_migration_map_items
         ]
 
         manifest = OrderedDict(header + model_changes)
@@ -136,14 +147,13 @@ class ModelDetectConflictStrategy(BaseConflictStrategy):
             for app_label, model_name in conflicting_models
         }
 
-    def _get_sorted_nodes(self):
+    def _get_sorted_nodes(self, app_labels):
         """
         Helper function used to write the manifest file in a deterministic way (sorted)
 
         Return graph nodes sorted by app order, which is its position in
         ``INSTALLED_APPS`` and the migration name
         """
-        app_labels = [app_config.label for app_config in apps.get_app_configs()]
 
         def _sort_node_key(node):
             (app_label, migration_name), migration = node
