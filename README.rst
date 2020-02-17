@@ -81,7 +81,7 @@ about the following scenario:
     {
         "admin.logentry": "0001_initial",
         "app.author": "0007_remove_author_state",
-        "app.book": "0006_add_book_field",   # 👀
+        "app.book": "0008_add_book_field",   # 👀
         "app.shelf": "0005_auto_20200217_1529"
     }
 
@@ -94,9 +94,9 @@ to resolve! She is trying to modify a line that has been modified in **master** 
         "admin.logentry": "0001_initial",
         "app.author": "0007_remove_author_state",
     <<<<<<< HEAD
-        "app.book": "0006_add_book_field",   # 👀 💁‍♂️
+        "app.book": "0008_add_book_field",   # 👀 💁‍♂️
     =======
-        "app.book": "0006_add_another_book_field",   # 👀 🤦‍♀️
+        "app.book": "0008_add_another_book_field",   # 👀 🤦‍♀️
     >>>>>>> master
         "app.shelf": "0005_auto_20200217_1529"
     }
@@ -109,6 +109,6 @@ manifest file looks like now:
     {
         "admin.logentry": "0001_initial",
         "app.author": "0007_remove_author_state",
-        "app.book": "0006_add_another_book_field",   # 👏
+        "app.book": "0008_add_another_book_field",   # 👏
         "app.shelf": "0005_auto_20200217_1529"
     }
