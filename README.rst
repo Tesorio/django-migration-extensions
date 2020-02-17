@@ -68,7 +68,7 @@ branch. Let's take a look on how a Manifest File looks like:
         "app.book": "0005_auto_20200217_1529",
         "app.shelf": "0005_auto_20200217_1529"
     }
-    
+
 This is a small example of a Manifest file generated automatically by the ``ModelDetectConflictStrategy`` strategy. Think
 about the following scenario:
 
@@ -85,7 +85,7 @@ about the following scenario:
         "app.shelf": "0005_auto_20200217_1529"
     }
 
-4. 🙍‍♀️ finished her changes, but now that she ran the ``makemigrations`` command, GitHub is saying she got conflicts
+4. 🙍‍♀️ finished her changes, but     now that she ran the ``makemigrations`` command, GitHub is saying she got conflicts
 to resolve! She is trying to modify a line that has been modified in **master** after she pulled last time.
 
 .. code:: python
@@ -93,11 +93,11 @@ to resolve! She is trying to modify a line that has been modified in **master** 
     {
         "admin.logentry": "0001_initial",
         "app.author": "0007_remove_author_state",
-<<<<<<< HEAD
+    <<<<<<< HEAD
         "app.book": "0006_add_book_field",   # 👀 💁‍♂️
-=======
+    =======
         "app.book": "0006_add_another_book_field",   # 👀 🤦‍♀️
->>>>>>> master
+    >>>>>>> master
         "app.shelf": "0005_auto_20200217_1529"
     }
 
