@@ -4,8 +4,8 @@ from collections import OrderedDict
 
 from django.apps import apps
 from django.conf import settings
-from django.db.migrations.operations.fields import FieldOperation
-from django.db.migrations.operations.models import ModelOperation
+
+from . import utils
 
 
 class BaseConflictStrategy(object):
@@ -157,7 +157,7 @@ class ModelDetectConflictStrategy(BaseConflictStrategy):
         Given a ``Migration`` object, find all changes that may affect any models
         """
         for operation in migration.operations:
-            if isinstance(operation, ModelOperation):
+            if utils.is_model_operation(operation):
                 yield (migration.app_label, operation.name_lower)
-            elif isinstance(operation, FieldOperation):
+            elif utils.is_field_operation(operation):
                 yield (migration.app_label, operation.model_name_lower)
